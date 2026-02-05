@@ -1,0 +1,81 @@
+body {
+  background: #f9e5ea;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  gap: 24px;
+  padding: 24px 16px 48px;
+}
+
+.scene {
+  display: grid;
+  place-items: center;
+}
+
+.title {
+  font-family: "Courier New", monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #3f1b2b;
+  text-align: center;
+}
+
+#heart-canvas {
+  width: 384px;
+  height: 448px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+}
+
+.side {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  display: block;
+  pointer-events: none;
+}
+
+.side-left {
+  left: 0;
+}
+
+.side-right {
+  right: 0;
+}
+
+.side-vines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 192px;
+  height: 100vh;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.side-swan {
+  position: absolute;
+  bottom: 24px;
+  width: 160px;
+  height: 160px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.side-left .side-swan {
+  left: 12px;
+}
+
+.side-right .side-swan {
+  right: 12px;
+  transform: scaleX(-1);
+}
+
