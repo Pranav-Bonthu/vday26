@@ -79,3 +79,182 @@ body {
   transform: scaleX(-1);
 }
 
+.game-body {
+  background: #f6eef4;
+  font-family: "Courier New", monospace;
+  color: #3f1b2b;
+}
+
+.game {
+  width: min(720px, 92vw);
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  text-align: center;
+}
+
+.game-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+}
+
+.game-header p {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-auto-rows: 1fr;
+  width: min(540px, 90vw);
+  aspect-ratio: 1 / 1;
+  border: 4px solid #2e1521;
+}
+
+.cell {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cell-color);
+  opacity: 0.7;
+}
+
+.cell.conflict {
+  outline: 3px solid #c0364f;
+  outline-offset: -3px;
+}
+
+.cell button {
+  all: unset;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: "Courier New", monospace;
+  font-size: 1.4rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.cell button:focus-visible {
+  outline: 2px solid #2e1521;
+  outline-offset: -2px;
+}
+
+.queen {
+  color: #2e1521;
+}
+
+.mark-x {
+  color: #2e1521;
+  font-weight: 700;
+}
+
+.game-actions {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.status {
+  min-height: 1.5rem;
+  font-weight: 600;
+}
+
+.warning {
+  min-height: 1.25rem;
+  font-weight: 600;
+  color: #b23b4f;
+}
+
+.warning.ok {
+  color: #2c7a3f;
+}
+
+.game-actions button {
+  background: #f24b94;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.continue {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  cursor: pointer;
+}
+
+.continue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f24b94;
+  clip-path: polygon(
+    50% 85%,
+    20% 65%,
+    10% 45%,
+    15% 28%,
+    30% 20%,
+    50% 28%,
+    70% 20%,
+    85% 28%,
+    90% 45%,
+    80% 65%
+  );
+  border: 4px solid #2e1521;
+  box-sizing: border-box;
+}
+
+.continue span {
+  position: relative;
+  z-index: 1;
+  color: #2e1521;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10vh;
+  width: 10px;
+  height: 14px;
+  opacity: 0.9;
+  animation: fall 2.8s linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+  }
+}
+

@@ -6,9 +6,25 @@
     <title>Next Page</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <main class="scene">
-      <p>Next page placeholder.</p>
+  <body class="game-body">
+    <main class="game">
+      <header class="game-header">
+        <h1>LinkedIn Queens</h1>
+        <p>
+          Place 9 queens so there is only 1 per row, column, and color.
+        </p>
+      </header>
+      <section class="board" id="board" aria-label="LinkedIn Queens board"></section>
+      <div class="game-actions">
+        <p class="status" id="status">Place a queen to begin.</p>
+        <p class="warning" id="warning">No conflicts.</p>
+        <button id="continue" class="continue" type="button" hidden>
+          <span>Continue</span>
+        </button>
+        <button id="reset" type="button">Reset</button>
+      </div>
     </main>
+    <div id="confetti" class="confetti" aria-hidden="true"></div>
+    <script src="next.js"></script>
   </body>
 </html>
