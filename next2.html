@@ -3,15 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Next Puzzle</title>
+    <title>Coffee Shop Simulator</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="game-body">
-    <main class="game">
+    <main class="game coffee-game">
       <header class="game-header">
-        <h1>Next Puzzle</h1>
-        <p>Placeholder for the next challenge.</p>
+        <h1>Coffee Shop Simulator</h1>
+        <p>Follow the recipe, then heat the drink without breaking the machine.</p>
       </header>
+
+      <div class="coffee-layout">
+        <aside class="recipe">
+          <h2>Recipe</h2>
+          <ul>
+            <li>1 part coffee</li>
+            <li>1 part milk</li>
+            <li>2 scoops of sugar</li>
+          </ul>
+        </aside>
+
+        <section class="coffee-stage">
+          <div class="cup" id="cup">
+            <div class="layer coffee" id="layer-coffee"></div>
+            <div class="layer milk" id="layer-milk"></div>
+          </div>
+        </section>
+
+        <section class="coffee-controls">
+          <div class="brew-row" id="pour-controls">
+            <div class="brew-column">
+              <button id="pour-coffee" type="button">Pour coffee</button>
+              <button id="done-coffee" class="check-btn" type="button" aria-label="Done pouring coffee">✓</button>
+            </div>
+            <div class="brew-column">
+              <button id="pour-milk" type="button" disabled>Pour milk</button>
+              <button id="done-milk" class="check-btn" type="button" disabled aria-label="Done pouring milk">✓</button>
+            </div>
+            <div class="sugar-tray" aria-hidden="true">
+              <span class="sugar-cube"></span>
+              <span class="sugar-cube"></span>
+              <span class="sugar-cube"></span>
+              <span class="sugar-cube"></span>
+              <span class="sugar-cube"></span>
+              <span class="sugar-cube"></span>
+            </div>
+          </div>
+
+          <div class="prep-row">
+            <div class="heat-launch" id="heat-launch" hidden>
+              <div class="ice-tray" aria-hidden="true">
+                <span class="ice-cube"></span>
+                <span class="ice-cube"></span>
+                <span class="ice-cube"></span>
+                <span class="ice-cube"></span>
+                <span class="ice-cube"></span>
+                <span class="ice-cube"></span>
+              </div>
+              <button id="coffee-continue" type="button" hidden>Continue</button>
+            </div>
+          </div>
+
+          <div class="heat-zone" id="heat-zone" hidden>
+            <div class="heat-actions">
+              <button id="serve-coffee" type="button" hidden>Serve coffee</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="customer-screen" id="customer-screen" hidden>
+        <button id="next-game" type="button" hidden>Next game</button>
+      </section>
     </main>
+    <script src="next2.js"></script>
   </body>
 </html>
