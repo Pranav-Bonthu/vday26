@@ -10,7 +10,7 @@
     <main class="game coffee-game">
       <header class="game-header">
         <h1>Coffee Shop Simulator</h1>
-        <p>Follow the recipe, then heat the drink without breaking the machine.</p>
+        <p>Follow the recipe, then serve the drink.</p>
       </header>
 
       <div class="coffee-layout">
@@ -25,8 +25,9 @@
 
         <section class="coffee-stage">
           <div class="cup" id="cup">
-            <div class="layer coffee" id="layer-coffee"></div>
-            <div class="layer milk" id="layer-milk"></div>
+              <div class="layer sugar" id="layer-sugar"></div>
+              <div class="layer coffee" id="layer-coffee"></div>
+              <div class="layer milk" id="layer-milk"></div>
           </div>
         </section>
 
@@ -34,40 +35,20 @@
           <div class="brew-row" id="pour-controls">
             <div class="brew-column">
               <button id="pour-coffee" type="button">Pour coffee</button>
-              <button id="done-coffee" class="check-btn" type="button" aria-label="Done pouring coffee">✓</button>
             </div>
             <div class="brew-column">
-              <button id="pour-milk" type="button" disabled>Pour milk</button>
-              <button id="done-milk" class="check-btn" type="button" disabled aria-label="Done pouring milk">✓</button>
+              <button id="pour-milk" type="button">Pour milk</button>
             </div>
-            <div class="sugar-tray" aria-hidden="true">
-              <span class="sugar-cube"></span>
-              <span class="sugar-cube"></span>
-              <span class="sugar-cube"></span>
-              <span class="sugar-cube"></span>
-              <span class="sugar-cube"></span>
-              <span class="sugar-cube"></span>
+            <div class="brew-column">
+              <button id="pour-sugar" type="button">Sugar pump</button>
+            </div>
+            <div class="brew-column">
+              <a id="send-customer" class="action-link" href="next3.html">Send to customer</a>
             </div>
           </div>
 
           <div class="prep-row">
-            <div class="heat-launch" id="heat-launch" hidden>
-              <div class="ice-tray" aria-hidden="true">
-                <span class="ice-cube"></span>
-                <span class="ice-cube"></span>
-                <span class="ice-cube"></span>
-                <span class="ice-cube"></span>
-                <span class="ice-cube"></span>
-                <span class="ice-cube"></span>
-              </div>
-              <button id="coffee-continue" type="button" hidden>Continue</button>
-            </div>
-          </div>
-
-          <div class="heat-zone" id="heat-zone" hidden>
-            <div class="heat-actions">
-              <button id="serve-coffee" type="button" hidden>Serve coffee</button>
-            </div>
+            <button id="serve-coffee" type="button" hidden>Serve to customer</button>
           </div>
         </section>
       </div>

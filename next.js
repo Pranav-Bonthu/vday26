@@ -279,7 +279,7 @@ function resetBoard() {
 
 resetBtn.addEventListener("click", resetBoard);
 continueBtn.addEventListener("click", () => {
-  window.location.href = "next2.html";
+  window.location.href = "queens-finish.html";
 });
 
 buildBoard();

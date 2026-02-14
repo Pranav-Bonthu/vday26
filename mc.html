@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="game-body">
+    <main class="game">
+      <section class="customer-screen mc-quiz">
+        <h1>Minecraft Memories</h1>
+        <div class="mc-layout">
+          <div class="mc-card">
+            <p class="mc-question" id="mc-question"></p>
+            <div id="mc-input-row" class="mc-input-row">
+              <input id="mc-answer" type="text" placeholder="Type your answer..." />
+              <button id="mc-submit" type="button">Submit</button>
+            </div>
+            <button id="mc-continue" type="button" hidden>Continue</button>
+            <p id="mc-feedback" class="mc-feedback" hidden>Correct!</p>
+          </div>
+          <div class="mc-card mc-inventory">
+            <h2>Inventory</h2>
+            <ul id="mc-inventory-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="mc.js"></script>
+  </body>
+</html>

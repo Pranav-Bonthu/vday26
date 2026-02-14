@@ -2,8 +2,6 @@ const canvas = document.getElementById("heart-canvas");
 const ctx = canvas.getContext("2d");
 const leftVines = document.getElementById("left-vines");
 const rightVines = document.getElementById("right-vines");
-const leftSwan = document.getElementById("left-swan");
-const rightSwan = document.getElementById("right-swan");
 
 const pixel = 4;
 
@@ -193,9 +191,6 @@ function drawSwan(canvasEl, flip = false) {
   });
 }
 
-drawSwan(leftSwan, false);
-drawSwan(rightSwan, true);
-
 canvas.addEventListener("click", () => {
-  window.location.href = "next.html";
+  window.location.href = "next2.html";
 });

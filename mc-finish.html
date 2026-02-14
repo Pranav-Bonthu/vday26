@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="game-body">
+    <main class="game">
+      <section class="customer-screen mc-board-screen">
+        <h1>Craft!</h1>
+        <div class="mc-board-layout">
+          <div class="mc-board-card">
+            <div id="mc-grid" class="mc-grid" aria-label="3 by 3 grid"></div>
+            <p id="mc-grid-feedback" class="mc-feedback" hidden>Perfect!</p>
+            <button id="mc-craft" type="button">Craft</button>
+            <a id="mc-continue" class="action-link" href="look2.html" hidden>
+              Continue
+            </a>
+          </div>
+          <div class="mc-board-card mc-inventory">
+            <h2>Inventory</h2>
+            <div id="mc-board-inventory" class="mc-board-inventory" aria-label="Drag items"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="mc-finish.js"></script>
+  </body>
+</html>

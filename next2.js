@@ -1,20 +1,14 @@
-const statusEl = document.getElementById("coffee-status");
 const pourCoffeeBtn = document.getElementById("pour-coffee");
-const doneCoffeeBtn = document.getElementById("done-coffee");
 const pourMilkBtn = document.getElementById("pour-milk");
-const doneMilkBtn = document.getElementById("done-milk");
+const sugarPumpBtn = document.getElementById("pour-sugar");
 const coffeeLayout = document.querySelector(".coffee-layout");
-const pourControls = document.getElementById("pour-controls");
-const heatLaunch = document.getElementById("heat-launch");
-const continueBtn = document.getElementById("coffee-continue");
-const iceCubes = Array.from(document.querySelectorAll(".ice-cube"));
-const heatZone = document.getElementById("heat-zone");
 const serveBtn = document.getElementById("serve-coffee");
 const cupEl = document.getElementById("cup");
 const customerScreen = document.getElementById("customer-screen");
 const nextGameBtn = document.getElementById("next-game");
 
 const layers = {
+  sugar: document.getElementById("layer-sugar"),
   coffee: document.getElementById("layer-coffee"),
   milk: document.getElementById("layer-milk"),
 };
@@ -22,17 +16,11 @@ const layers = {
 const cupMaxHeight = 180;
 const coffeeTarget = 100;
 const milkTarget = 100;
-
 let coffeeLevel = 0;
 let milkLevel = 0;
-let coffeeTemp = 0;
-let iceFinished = 0;
+let sugarLevel = 0;
 let pourInterval = null;
-
-function setStatus(message) {
-  if (!statusEl) return;
-  statusEl.textContent = message;
-}
+const sugarLayerHeight = 20;
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -56,26 +44,17 @@ function mixColor(colorA, colorB, ratio) {
 }
 
 function updateCup() {
+  const sugarHeight = (sugarLevel / 100) * sugarLayerHeight;
   const coffeeHeight = (coffeeLevel / 100) * cupMaxHeight;
   const milkHeight = (milkLevel / 100) * cupMaxHeight;
+  layers.sugar.style.height = `${sugarHeight}px`;
   layers.coffee.style.height = `${coffeeHeight}px`;
   layers.milk.style.height = `${milkHeight}px`;
-  layers.milk.style.bottom = `${coffeeHeight}px`;
+  layers.coffee.style.bottom = `${sugarHeight}px`;
+  layers.milk.style.bottom = `${coffeeHeight + sugarHeight}px`;
 
   const latteRatio = clamp(milkLevel / 100, 0, 1);
   layers.coffee.style.background = mixColor("#6b3b2a", "#c59a72", latteRatio);
-}
-
-function finishCheck() {
-  if (coffeeLevel >= coffeeTarget &&
-      milkLevel >= milkTarget &&
-      coffeeTemp >= 100 &&
-      true) {
-    setStatus("Drink complete! Serve it up.");
-    pourCoffeeBtn.disabled = true;
-    pourMilkBtn.disabled = true;
-    serveBtn.hidden = false;
-  }
 }
 
 function stopPour() {
@@ -91,8 +70,10 @@ function startPour(type) {
   pourInterval = setInterval(() => {
     if (type === "coffee") {
       coffeeLevel = clamp(coffeeLevel + rate, 0, coffeeTarget);
-    } else {
+    } else if (type === "milk") {
       milkLevel = clamp(milkLevel + rate, 0, milkTarget);
+    } else if (type === "sugar") {
+      sugarLevel = clamp(sugarLevel + rate, 0, 100);
     }
     updateCup();
   }, 80);
@@ -105,85 +86,29 @@ function setupHoldButton(button, onStart) {
     onStart();
   };
   const end = () => stopPour();
+  if (!button) return;
   button.addEventListener("pointerdown", start);
   button.addEventListener("pointerup", end);
   button.addEventListener("pointerleave", end);
   button.addEventListener("pointercancel", end);
 }
 
+setupHoldButton(pourCoffeeBtn, () => startPour("coffee"));
+setupHoldButton(pourMilkBtn, () => startPour("milk"));
+setupHoldButton(sugarPumpBtn, () => startPour("sugar"));
+
 function resetGame() {
-  coffeeLevel = 0;
-  milkLevel = 0;
-  coffeeTemp = 0;
-  stopPour();
-  pourCoffeeBtn.disabled = false;
-  doneCoffeeBtn.disabled = false;
-  pourMilkBtn.disabled = true;
-  doneMilkBtn.disabled = true;
   serveBtn.hidden = true;
   coffeeLayout.hidden = false;
   customerScreen.hidden = true;
   nextGameBtn.hidden = true;
-  heatZone.hidden = true;
-  heatLaunch.hidden = true;
-  continueBtn.hidden = true;
-  pourControls.hidden = false;
-  iceCubes.forEach((cube) => cube.classList.remove("finished"));
-  iceFinished = 0;
-  setStatus("");
-  updateCup();
 }
-
-setupHoldButton(pourCoffeeBtn, () => startPour("coffee"));
-setupHoldButton(pourMilkBtn, () => startPour("milk"));
-doneCoffeeBtn.addEventListener("click", () => {
-  if (coffeeLevel <= 0) {
-    setStatus("Pour some coffee first.");
-    return;
-  }
-  pourCoffeeBtn.disabled = true;
-  doneCoffeeBtn.disabled = true;
-  pourMilkBtn.disabled = false;
-  doneMilkBtn.disabled = false;
-  setStatus("Now pour the milk.");
-});
-
-doneMilkBtn.addEventListener("click", () => {
-  if (milkLevel <= 0) {
-    setStatus("Pour some milk first.");
-    return;
-  }
-  pourMilkBtn.disabled = true;
-  doneMilkBtn.disabled = true;
-  heatLaunch.hidden = false;
-  setStatus("Tap two ice cubes, then continue.");
-});
-
-iceCubes.forEach((cube) => {
-  cube.addEventListener("click", () => {
-    if (cube.classList.contains("finished")) return;
-    cube.classList.add("finished");
-    iceFinished += 1;
-    if (iceFinished >= 2) {
-      continueBtn.hidden = false;
-      setStatus("Ice ready. Press continue to heat.");
-    }
-  });
-});
-
-continueBtn.addEventListener("click", () => {
-  pourControls.hidden = true;
-  heatLaunch.hidden = true;
-  heatZone.hidden = false;
-  coffeeTemp = 100;
-  setStatus("Drink heated. Serve it up.");
-  finishCheck();
-});
 
 serveBtn.addEventListener("click", () => {
   coffeeLayout.hidden = true;
   customerScreen.hidden = false;
   nextGameBtn.hidden = false;
 });
+
 
 resetGame();
